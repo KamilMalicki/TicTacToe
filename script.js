@@ -10,6 +10,7 @@ let gameActive = false;
 
 // Find opponent
 playButton.addEventListener("click", () => {
+    playButton.disabled = true; // Disable button during matchmaking
     socket.emit("findGame");
     statusDiv.innerHTML = "Searching for an opponent... <span class='blink'>⚡</span>";
 });
@@ -58,6 +59,7 @@ socket.on("gameOver", (result) => {
     setTimeout(() => {
         gameBoard.style.display = "none";
         playButton.style.display = "block";
+        playButton.disabled = false; // Re-enable button after game ends
         statusDiv.innerHTML = "Click <span class='highlight'>PLAY</span> to rematch!";
         cells.forEach(cell => {
             cell.textContent = "";
