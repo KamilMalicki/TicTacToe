@@ -11,7 +11,6 @@ let gameActive = false;
 // Find opponent
 playButton.addEventListener("click", () => {
     socket.emit("findGame");
-    playButton.hide();
     statusDiv.innerHTML = "Searching for an opponent... <span class='blink'>⚡</span>";
 });
 
