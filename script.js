@@ -8,26 +8,25 @@ let playerSymbol = "";
 let currentPlayer = "";
 let gameActive = false;
 
-// Find opponent
+// znalezienie gracza
 playButton.addEventListener("click", () => {
-    playButton.disabled = true; // Disable button during matchmaking
+    playButton.disabled = true; // klikniety przycisk
     socket.emit("findGame");
     statusDiv.innerHTML = "Searching for an opponent... <span class='blink'>⚡</span>";
 });
 
-// Handle moves
+// łapanie kliknięcia w komórki
 cells.forEach(cell => {
     cell.addEventListener("click", () => {
-        if (!gameActive || currentPlayer !== playerSymbol) return;
-        
         const index = cell.getAttribute("data-index");
         if (cell.textContent === "") {
             socket.emit("makeMove", { index, symbol: playerSymbol });
         }
+        if (!gameActive || currentPlayer !== playerSymbol) return;
     });
 });
 
-// Socket.io events
+// Socket.io 
 socket.on("gameStart", (symbol) => {
     playerSymbol = symbol;
     currentPlayer = "X";
@@ -59,7 +58,7 @@ socket.on("gameOver", (result) => {
     setTimeout(() => {
         gameBoard.style.display = "none";
         playButton.style.display = "block";
-        playButton.disabled = false; // Re-enable button after game ends
+        playButton.disabled = false; // naprawa przycisku
         statusDiv.innerHTML = "Click <span class='highlight'>PLAY</span> to rematch!";
         cells.forEach(cell => {
             cell.textContent = "";

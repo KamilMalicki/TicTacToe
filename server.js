@@ -53,7 +53,12 @@ io.on("connection", (socket) => {
         // Sprawdź wygraną/remis
         const winner = checkWinner(game.board);
         if (winner || !game.board.includes("")) {
+            
             game.players.forEach(player => {
+                player.emit("updateBoard", {
+                    board: game.board,
+                    currentPlayer: game.currentPlayer,
+                });
                 player.emit("gameOver", winner || "draw");
             });
             delete games[gameId];

@@ -30,6 +30,7 @@ body {
     box-shadow: 0 0 20px rgba(0, 255, 170, 0.3);
     max-width: 500px;
     width: 90%;
+    min-height: 400px;
 }
 
 h1 {
@@ -141,4 +142,58 @@ h1 {
 .cell.o {
     color: var(--neon-pink);
     text-shadow: 0 0 10px var(--neon-pink);
+}
+
+.cell:active {
+    transform: scale(0.95);
+    transition: transform 0.1s;
+}
+
+/* Responsywność */
+@media (max-width: 600px) {
+    .cell {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+    }
+    .container {
+        max-width: 300px;
+        padding: 1rem;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 16px;
+    }
+    
+    .game-container {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+@keyframes neonPulse {
+    0%, 100% {
+        text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+    }
+    50% {
+        text-shadow: 0 0 20px var(--neon-blue), 0 0 40px var(--neon-blue);
+    }
+}
+
+.neon-text {
+    animation: neonPulse 2s ease-in-out infinite;
+}
+
+/* Płynne przejścia przy hover dla przycisku i komórek */
+.neon-button {
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cell {
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
